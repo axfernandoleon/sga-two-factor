@@ -34,4 +34,3 @@ Por lo tanto nuestro aplicativo se desarrollara de la siguiente manera teniendo 
 
 - En la etapa de autorización tendremos los siguientes roles y sus funciones:
 
-
