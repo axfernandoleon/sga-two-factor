@@ -1,4 +1,4 @@
-# SGA CIBERSEGURIDAD
+# CIBERSEGURIDAD
 
 # Integrantes:
 Alex  León
