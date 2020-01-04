@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# Ciberseguridad
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
-=======
 # CIBERSEGURIDAD
 
 # Integrantes:
@@ -62,7 +57,6 @@ Se asignara los roles y sus funciones dentrol del sistema una vez hecho eso se p
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
->>>>>>> 9d4ec4cd4ee10f8fc431dbaaca4abd8602e7b70e
 
 ## Development server
 
