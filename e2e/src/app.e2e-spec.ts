@@ -10,7 +10,11 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
+<<<<<<< HEAD
     expect(page.getTitleText()).toEqual('ciberseguridad app is running!');
+=======
+    expect(page.getTitleText()).toEqual('sga app is running!');
+>>>>>>> 9d4ec4cd4ee10f8fc431dbaaca4abd8602e7b70e
   });
 
   afterEach(async () => {
