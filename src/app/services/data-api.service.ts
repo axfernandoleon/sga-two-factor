@@ -15,7 +15,7 @@ export class DataApiService {
   private notas: Observable<NotaInterface[]>;
   private notaDoc: AngularFirestoreDocument<NotaInterface>;
   private nota: Observable<NotaInterface>;
-  public selectedBook: NotaInterface = {
+  public selectedNota: NotaInterface = {
     id: null
   };
 

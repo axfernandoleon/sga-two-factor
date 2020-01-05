@@ -1,4 +1,9 @@
+import { NgForm } from '@angular/forms';
+
 import { Component, OnInit } from '@angular/core';
+import { NotaInterface } from './../../models/nota';
+import { DataApiService } from './../../services/data-api.service';
+
 
 @Component({
   selector: 'app-modal',
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dataApi: DataApiService
+  ) { }
 
   ngOnInit() {
+
+  }
+
+  onSaveNota(notaForm: NgForm): void{
+    this.dataApi.addNota(notaForm.value);
   }
 
 }
