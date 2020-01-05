@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <form name="formNota" #formNota="ngForm" (ngSubmit)="onSaveNota(formNota)">
-                    <input type="text" name="notaId">
+                    <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedNota.id">
                     <div class="form-group">
                         <label for="titulo" class="col-form-label">Titulo:</label>
                         <input type="text" class="form-control" name="titulo"
@@ -20,9 +20,9 @@
                         <div class="form-group col-md-6">
                             <label for="materia">Materia</label>
                             <select name="materia" class="form-control" [(ngModel)]="this.dataApi.selectedNota.materia">
-                                <option value="Ingles">Ciberseguridad</option>
-                                <option value="Ingles">Programacion</option>
-                                <option value="Ingles">Auditoria Informatica</option>
+                                <option value="Ciberseguridad">Ciberseguridad</option>
+                                <option value="Programacion">Programacion</option>
+                                <option value="Auditoria Informatica">Auditoria Informatica</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -38,7 +38,7 @@
                             [(ngModel)]="this.dataApi.selectedNota.fecha">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" #btnClose>Cerrar</button>
                         <button type="submit" class="btn btn-primary">Enviar Nota</button>
                     </div>
                 </form>

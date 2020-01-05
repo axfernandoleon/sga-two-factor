@@ -20,17 +20,21 @@ export class ListaNotasComponent implements OnInit {
     this.getListNotas();
   }
 
-  getListNotas(){
+  getListNotas() {
     this.dataApi.getAllNotas()
-    .subscribe(notas => {
-      this.notas = notas;
-    });
+      .subscribe(notas => {
+        this.notas = notas;
+      });
   }
 
-  onDeleteNota(){
-    console.log('BORRAR LIBRO');
+  onDeleteNota(idNota: string): void {
+    const confirmacion = confirm('Seguro que deseas Eliminar?')
+    if (confirmacion) {
+      this.dataApi.deleteNota(idNota);
+    }
   }
 
-
-
+  onPreUpdateNota(nota: NotaInterface){
+    this.dataApi.selectedNota = Object.assign({}, nota);
+  }
 }

@@ -59,6 +59,5 @@ export class DataApiService {
   deleteNota(idNota: string): void {
     this.notaDoc = this.afs.doc<NotaInterface>(`notas/${idNota}`);
     this.notaDoc.delete();
-
   }
 }
