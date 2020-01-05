@@ -8,6 +8,7 @@ import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
 import { ProfileComponent } from './components/users/profile/profile.component';
 import { Page04Component } from './components/page04/page04.component';
+import { RolesComponent } from './components/roles/roles.component';
 
 //Rutas
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'offers', component: OffersComponent}, //Solo usuarios autenticados
   {path: 'notas:/id', component: DetallesNotaComponent},
   {path: 'admin/lista-notas', component: ListaNotasComponent},//Solo usuarios autenticados
+  {path: 'admin/roles', component: RolesComponent}, //Solo usuarios autenticados
   {path: 'user/login', component: LoginComponent},
   {path: 'user/register', component: RegisterComponent},
   {path: 'user/profile', component: ProfileComponent}, //Solo usuarios autenticados

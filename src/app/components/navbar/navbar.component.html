@@ -24,6 +24,12 @@
       <li class="nav-item" *ngIf="isLogged">
         <a class="nav-link" routerLink="/admin/lista-notas">Lista Notas</a>
       </li>
+
+      <!-- Administrador Roles -->
+      <li class="nav-item" *ngIf="isLogged">
+        <a class="nav-link" routerLink="admin/roles">Asignación de Roles</a>
+      </li>
+
       <li class="nav-item" *ngIf="!isLogged">
         <a class="nav-link" routerLink="/user/login">Login
         </a>

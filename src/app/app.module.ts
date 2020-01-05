@@ -24,7 +24,12 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { Page04Component } from './components/page04/page04.component'
 
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RolesComponent } from './components/roles/roles.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   declarations: [
@@ -39,14 +44,20 @@ import {FormsModule} from '@angular/forms';
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
-    Page04Component
+    Page04Component,
+    RolesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    FormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [AngularFireAuth, AngularFirestore],
   bootstrap: [AppComponent]

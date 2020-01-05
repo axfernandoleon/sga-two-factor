@@ -2,42 +2,54 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { auth } from 'firebase/app';
-
+import { AngularFirestore } from "@angular/fire/firestore";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   constructor(
-    private afsAuth: AngularFireAuth
+    private afsAuth: AngularFireAuth, private db: AngularFirestore
   ) { }
 
 
-  registerUser(email: string, pass: string){
+  registerUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.afsAuth.auth.createUserWithEmailAndPassword(email, pass)
         .then(userData => resolve(userData),
-        err => reject(err));
+          err => reject(err));
     });
   }
 
-  loginEmailUser(email: string, pass: string){
+  loginEmailUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.afsAuth.auth.signInWithEmailAndPassword(email, pass)
-      .then(userData => resolve(userData),
-      err => reject(err));
+        .then(userData => resolve(userData),
+          err => reject(err));
     });
   }
 
-  loginGoogleUser(){
+  loginGoogleUser() {
     return this.afsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
 
-  logoutUser(){
+  logoutUser() {
     return this.afsAuth.auth.signOut();
   }
 
-  isAuth(){
+  isAuth() {
     return this.afsAuth.authState.pipe(map(auth => auth));
   }
+
+  listRoles() {
+    return this.db.collection('roles').snapshotChanges().pipe(
+      map(actions =>
+        actions.map(a => {
+          const id = a.payload.doc.id;
+          return id;
+        })
+      )
+    );
+  }
+
 }

@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   user: UserInterface = {
-    name: '',
+    nombres: '',
     email: '',
   };
 
