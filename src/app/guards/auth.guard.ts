@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.afsAuth.authState
     .pipe(take(1))
-    .pipe(map(authState => !!authState))
+    .pipe(map(authState => !!authState)) 
     .pipe(tap(auth => {
       if (!auth) {
         this.router.navigate(['/user/login']);
