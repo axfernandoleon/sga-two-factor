@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.dataApi.getAllNotas().subscribe(notas => {
       console.log('Notas', notas);
+      this.notas = notas;
     });
   }
 }
+

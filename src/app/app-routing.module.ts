@@ -15,7 +15,7 @@ const routes: Routes = [
 
   {path: '', component: HomeComponent},
   {path: 'offers', component: OffersComponent}, //Solo usuarios autenticados
-  {path: 'notas:/id', component: DetallesNotaComponent},
+  {path: 'nota/:id', component: DetallesNotaComponent},
   {path: 'admin/lista-notas', component: ListaNotasComponent},//Solo usuarios autenticados
   {path: 'admin/roles', component: RolesComponent}, //Solo usuarios autenticados
   {path: 'user/login', component: LoginComponent},

@@ -1,1 +1,48 @@
-<p>modal works!</p>
+<div class="modal fade" id="modalNota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva Nota</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="formNota" #formNota="ngForm" (ngSubmit)="onSaveNota(formNota)">
+                    <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedNota.id">
+                    <div class="form-group">
+                        <label for="titulo" class="col-form-label">Titulo:</label>
+                        <input type="text" class="form-control" name="titulo"
+                            [(ngModel)]="this.dataApi.selectedNota.titulo">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="materia">Materia</label>
+                            <select name="materia" class="form-control" [(ngModel)]="this.dataApi.selectedNota.materia">
+                                <option value="Ciberseguridad">Ciberseguridad</option>
+                                <option value="Programacion">Programacion</option>
+                                <option value="Auditoria Informatica">Auditoria Informatica</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="nota">Nota</label>
+                            <input type="text" name="nota" class="form-control"
+                                [(ngModel)]="this.dataApi.selectedNota.nota">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Fecha:</label>
+                        <input type="text" name="fecha" class="form-control"
+                            [(ngModel)]="this.dataApi.selectedNota.fecha">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" #btnClose>Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Enviar Nota</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

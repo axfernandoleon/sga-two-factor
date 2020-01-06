@@ -1,11 +1,34 @@
-<p>lista-notas works!</p>
-<p>lista-notas works!</p>
+<section class="row mt-5">
+    <div class="col">
+        <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalNota">Nueva Nota</button>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Materia</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col">Fecha Publicada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let nota of notas; index as i">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{nota.titulo}}</td>
+                    <td>{{nota.materia}}</td>
+                    <td>{{nota.nota}}</td>
+                    <td>{{nota.fecha}}</td>
+                    <td>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalNota"
+                        (click)= "onPreUpdateNota(nota)">Actualizar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="onDeleteNota(nota.id)" >Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
-
-<p>lista-notas works!</p>
-
-
-<p>lista-notas works!</p>
-
-
-<p>lista-notas works!</p>
+<app-modal></app-modal>
