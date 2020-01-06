@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   public email: string = '';
   public password: string = '';
-
+  public nombres: string = '';
+  public apellidos: string = '';
   ngOnInit() {
   }
 
@@ -24,6 +25,14 @@ export class RegisterComponent implements OnInit {
     this.authService.registerUser(this.email, this.password)
     .then((res) => {
       this.authService.isAuth().subscribe( user => {
+        console.log(user.uid);
+        const data = {
+          id: user.uid,
+          email: user.email,
+          nombres: this.nombres,
+          apellidos: this.apellidos
+        };
+        this.authService.updateUserData(user, data);
         if (user){
           user.updateProfile({
             displayName: ''
@@ -37,10 +46,18 @@ export class RegisterComponent implements OnInit {
   onLoginGogle(): void{
     this.authService.loginGoogleUser()
     .then((res) => {
-      this.onLoginRedirect();
+      const data = {
+        id: res.user.uid,
+        email: res.user.email,
+        nombres: res.user.displayName,
+        
+      };
+      this.authService.updateUserData(res.user, data);
+      console.log(res.user);
+      
+      //this.onLoginRedirect();
     }).catch(err => console.log('err', err));
   }
-
   onLoginRedirect(): void{
     this.router.navigate(['admin/lista-notas']);
   }

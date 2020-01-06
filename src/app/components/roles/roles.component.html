@@ -6,7 +6,8 @@
             <th scope="col">Nombres</th>
             <th scope="col">Apellidos</th>
             <th scope="col">Rol</th>
-            <th scope="col" class="d-flex justify-content-end">Asignar/Actualizar Rol</th>
+            <th scope="col" >Asignar/Actualizar Rol</th>
+            <th scope="col" class="d-flex justify-content-end">Eliminar</th>
         </tr>
     </thead>
     <tbody>
@@ -14,7 +15,7 @@
             <td>{{ item.nombres }}</td>
             <td>{{ item.apellidos}}</td>
             <td>{{item.rol}}</td>
-            <td class="d-flex justify-content-end">
+            <td>
                 <div class="btn-group" dropdown>
                     <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                         aria-controls="dropdown-basic" click="listRoles()">
@@ -26,6 +27,9 @@
                                 class="dropdown-item">{{choice}}</a></li>
                     </ul>
                 </div>
+            </td>
+            <td class="d-flex justify-content-end">
+                <button class="btn btn-danger" (click)="deleteAccount(item.id)" >Eliminar</button>
             </td>
         </tr>
 

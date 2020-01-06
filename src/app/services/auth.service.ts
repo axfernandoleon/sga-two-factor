@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { auth } from 'firebase/app';
-import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
 
   constructor(
     private afsAuth: AngularFireAuth, private db: AngularFirestore
@@ -16,7 +18,12 @@ export class AuthService {
   registerUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.afsAuth.auth.createUserWithEmailAndPassword(email, pass)
-        .then(userData => resolve(userData),
+        .then(userData => {
+          resolve(userData)
+          console.log("Hola", userData);
+
+          // this.updateUserData(credential.user);
+        },
           err => reject(err));
     });
   }
@@ -52,4 +59,8 @@ export class AuthService {
     );
   }
 
+  updateUserData(user, data) {
+    const userRef: AngularFirestoreDocument<any> = this.db.doc(`users/${user.uid}`);
+    return userRef.set(data, { merge: true })
+  }
 }
