@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private router: Router,
     private authService: AuthService
-    ) { }
+  ) { }
 
   public email: string = '';
   public password: string = '';
@@ -23,29 +23,46 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLogin(): void{
+  onLogin(): void {
     console.log('email', this.email);
     console.log('password', this.password);
     this.authService.loginEmailUser(this.email, this.password)
-    .then((res) => {
-      this.onLoginRedirect();
-    }).catch(err => console.log('err', err.message));
+      .then((res) => {
+        this.onLoginRedirect();
+      }).catch(err => console.log('err', err.message));
   }
 
-  onLoginGogle(): void{
+  onLoginGogle(): void {
     this.authService.loginGoogleUser()
-    .then((res) => {
-      this.onLoginRedirect();
-    }).catch(err => console.log('err', err));
+      .then((res) => {
+        this.onLoginRedirect();
+      }).catch(err => console.log('err', err));
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.logoutUser();
   }
 
-  onLoginRedirect(): void{
-    this.router.navigate(['admin/lista-notas']);
-    
+  onLoginRedirect(): void {
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.authService.isUserRol(auth.uid).subscribe(userRole => {
+
+          const isAdmin = Object.assign({}, userRole.rol).hasOwnProperty('admin');
+          const isDocente = Object.assign({}, userRole.rol).hasOwnProperty('docente');
+          if (isDocente) {
+            this.router.navigate(['admin/lista-notas']);
+          } else if (isAdmin) {
+            this.router.navigate(['admin/roles']);
+          } else {
+
+          }
+
+        })
+      }
+    })
+
+
   }
 
 }

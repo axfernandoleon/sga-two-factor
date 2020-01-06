@@ -21,45 +21,61 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddUser(){
+  onAddUser() {
     this.authService.registerUser(this.email, this.password)
-    .then((res) => {
-      this.authService.isAuth().subscribe( user => {
-        console.log(user.uid);
-        const data = {
-          id: user.uid,
-          email: user.email,
-          nombres: this.nombres,
-          apellidos: this.apellidos
-        };
-        this.authService.updateUserData(user, data);
-        if (user){
-          user.updateProfile({
-            displayName: ''
-          }).then(() => {
-          }).catch((error) =>  console.log('error', error));
-        }
-      });
-    }).catch(err => console.log('err', err.message));
+      .then((res) => {
+        this.authService.isAuth().subscribe(user => {
+          console.log(user.uid);
+          const data = {
+            id: user.uid,
+            email: user.email,
+            nombres: this.nombres + " " + this.apellidos
+          };
+          this.authService.updateUserData(user, data);
+          if (user) {
+            user.updateProfile({
+              displayName: ''
+            }).then(() => {
+            }).catch((error) => console.log('error', error));
+          }
+        });
+      }).catch(err => console.log('err', err.message));
   }
 
-  onLoginGogle(): void{
+  onLoginGogle(): void {
     this.authService.loginGoogleUser()
-    .then((res) => {
-      const data = {
-        id: res.user.uid,
-        email: res.user.email,
-        nombres: res.user.displayName,
-        
-      };
-      this.authService.updateUserData(res.user, data);
-      console.log(res.user);
-      
-      //this.onLoginRedirect();
-    }).catch(err => console.log('err', err));
+      .then((res) => {
+        const data = {
+          id: res.user.uid,
+          email: res.user.email,
+          nombres: res.user.displayName,
+
+        };
+        this.authService.updateUserData(res.user, data);
+
+        this.onLoginRedirect();
+      }).catch(err => console.log('err', err));
   }
-  onLoginRedirect(): void{
-    this.router.navigate(['admin/lista-notas']);
+  onLoginRedirect(): void {
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.authService.isUserRol(auth.uid).subscribe(userRole => {
+
+          const isAdmin = Object.assign({}, userRole.rol).hasOwnProperty('admin');
+          const isDocente = Object.assign({}, userRole.rol).hasOwnProperty('docente');
+          if (isDocente) {
+            this.router.navigate(['admin/lista-notas']);
+          } else if (isAdmin) {
+            this.router.navigate(['admin/roles']);
+          } else {
+
+          }
+
+        })
+      }
+    })
+
+
   }
 
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'user/login', component: LoginComponent},
   {path: 'user/register', component: RegisterComponent},
   {path: 'user/profile', component: ProfileComponent , canActivate: [AuthGuard]}, //Solo usuarios autenticados
-  // {path: '**', component: Page04Component}
+  {path: '**', component: Page04Component}
 ];
 
 @NgModule({

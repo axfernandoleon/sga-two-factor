@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotaInterface } from './../../../models/nota';
 import { DataApiService } from './../../../services/data-api.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-lista-notas',
@@ -9,15 +10,29 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./lista-notas.component.css']
 })
 export class ListaNotasComponent implements OnInit {
+  isDocente: boolean;
 
   constructor(
-    private dataApi: DataApiService
+    private dataApi: DataApiService,
+    private authService: AuthService
   ) { }
 
   private notas: NotaInterface[];
 
   ngOnInit() {
-    this.getListNotas();
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.authService.isUserRol(auth.uid).subscribe(userRole=> {
+            this.isDocente= Object.assign({}, userRole.rol).hasOwnProperty('docente')
+            
+            if (this.isDocente) {
+              this.getListNotas();
+            }
+            
+        })
+      }
+    })
+    
   }
 
   getListNotas() {
