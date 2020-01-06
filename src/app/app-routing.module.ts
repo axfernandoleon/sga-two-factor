@@ -9,14 +9,15 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { ProfileComponent } from './components/users/profile/profile.component';
 import { Page04Component } from './components/page04/page04.component';
 import { RolesComponent } from './components/roles/roles.component';
+import { AuthGuard } from "./guards/auth.guard";
 
 //Rutas
 const routes: Routes = [
 
   {path: '', component: HomeComponent},
-  {path: 'offers', component: OffersComponent}, //Solo usuarios autenticados
+  {path: 'offers', component: OffersComponent, canActivate: [AuthGuard]}, //Solo usuarios autenticados
   {path: 'nota/:id', component: DetallesNotaComponent},
-  {path: 'admin/lista-notas', component: ListaNotasComponent},//Solo usuarios autenticados
+  {path: 'admin/lista-notas', component: ListaNotasComponent, canActivate: [AuthGuard]},//Solo usuarios autenticados
   {path: 'admin/roles', component: RolesComponent}, //Solo usuarios autenticados
   {path: 'user/login', component: LoginComponent},
   {path: 'user/register', component: RegisterComponent},
