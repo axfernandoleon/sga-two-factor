@@ -3,7 +3,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { OffersComponent } from './components/offers/offers.component';
 import { DetallesNotaComponent } from './components/detalles-nota/detalles-nota.component';
 import { ListaNotasComponent } from './components/admin/lista-notas/lista-notas.component'
 import { LoginComponent } from './components/users/login/login.component';
@@ -16,16 +15,15 @@ import { AuthGuard } from "./guards/auth.guard";
 
 //Rutas
 const routes: Routes = [
-
-  {path: '', component: HomeComponent},
-  {path: 'offers', component: OffersComponent, canActivate: [AuthGuard]}, //Solo usuarios autenticados
+  {path: '', component: LoginComponent},
+  {path: 'ver-notas', component: HomeComponent},
   {path: 'nota/:id', component: DetallesNotaComponent},
   {path: 'admin/lista-notas', component: ListaNotasComponent, canActivate: [AuthGuard]},//Solo usuarios autenticados
   {path: 'admin/roles', component: RolesComponent}, //Solo usuarios autenticados
   {path: 'admin/phone-login', component: PhoneLoginComponent},
   {path: 'user/login', component: LoginComponent},
   {path: 'user/register', component: RegisterComponent},
-  {path: 'user/profile', component: ProfileComponent}, //Solo usuarios autenticados
+  {path: 'user/profile', component: ProfileComponent , canActivate: [AuthGuard]}, //Solo usuarios autenticados
   {path: '**', component: Page04Component}
 ];
 

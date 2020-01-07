@@ -17,7 +17,6 @@ import { HeroComponent } from './components/hero/hero.component';
 import { HomeComponent } from './components/home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { OffersComponent } from './components/offers/offers.component';
 import { ProfileComponent } from './components/users/profile/profile.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
@@ -42,7 +41,6 @@ import { PhoneLoginComponent } from './components/phone-login/phone-login.compon
     HomeComponent,
     ModalComponent,
     NavbarComponent,
-    OffersComponent,
     LoginComponent,
     ProfileComponent,
     RegisterComponent,

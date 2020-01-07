@@ -1,43 +1,55 @@
-<h2 class="text-uppercase text-secondary">Asignación de Roles </h2>
+<div *ngIf="isAdmin">
+    <h2 class="text-uppercase text-secondary">Asignación de Roles </h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Nombres</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">Rol</th>
-            <th scope="col" class="d-flex justify-content-end">Asignar/Actualizar Rol</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of users | async">
-            <td>{{ item.nombres }}</td>
-            <td>{{ item.apellidos}}</td>
-            <td>{{item.rol}}</td>
-            <td class="d-flex justify-content-end">
-                <div class="btn-group" dropdown>
-                    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                        aria-controls="dropdown-basic" click="listRoles()">
-                        Seleccionar <span class="caret"></span>
-                    </button>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
-                        aria-labelledby="button-basic">
-                        <li role="menuitem" *ngFor="let choice of aux" (click)="openModal(template, choice, item.id)" class="cursor"><a
-                                class="dropdown-item">{{choice}}</a></li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-
-    </tbody>
-</table>
-<ng-template #template>
-    <div class="modal-body text-center">
-        <p>Quieres confirmar?</p>
-        <button type="button" class="btn btn-default" (click)="confirm()">Si</button>
-        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombres</th>
+    
+                <th scope="col">Rol</th>
+                <th scope="col">Asignar/Actualizar Rol</th>
+                <th scope="col" class="d-flex justify-content-end">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of users | async">
+                <td>{{ item.nombres }}</td>
+                <td>
+                    <button class="btn btn-success mr-2" *ngIf="item.rol.admin == true">Admin</button>
+                    <button class="btn btn-warning mr-2" *ngIf="item.rol.docente == true">Docente</button>
+    
+                </td>
+                <td>
+                    <div class="btn-group" dropdown>
+                        <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                            aria-controls="dropdown-basic" click="listRoles()">
+                            Seleccionar <span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                            aria-labelledby="button-basic">
+                            <li role="menuitem" *ngFor="let choice of aux" (click)="openModal(template, choice, item.id)"
+                                class="cursor"><a class="dropdown-item">{{choice}}</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <td class="d-flex justify-content-end">
+                    <button class="btn btn-danger" (click)="deleteAccount(item.id)">Eliminar</button>
+                </td>
+            </tr>
+    
+        </tbody>
+    </table>
+    <ng-template #template>
+        <div class="modal-body text-center">
+            <p>Quieres confirmar?</p>
+            <button type="button" class="btn btn-default" (click)="confirm()">Si</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+    </ng-template>
+    <div *ngFor="let alert of alerts">
+        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
     </div>
-</ng-template>
-<div *ngFor="let alert of alerts">
-    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
-  </div>
+</div>
+<div *ngIf="!isAdmin">
+    <h2 class="text-uppercase">No tienes Permisos Suficientes</h2>
+</div>

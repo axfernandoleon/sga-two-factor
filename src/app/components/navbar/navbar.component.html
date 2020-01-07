@@ -1,18 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-  <a class="navbar-brand" routerLink="/">{{app_name}}</a>
+  <a class="navbar-brand" href="#">{{app_name}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="mainNavbar">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" *ngIf="isLogged">
-        <a class="nav-link" routerLink="/offers">Offers
-        </a>
-      </li>
-      LOGGED: {{isLogged}}
-    </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item" *ngIf="!isLogged">
         <a class="nav-link" routerLink="/user/register">Register
@@ -21,12 +14,19 @@
       <li class="nav-item" *ngIf="isLogged">
         <a class="nav-link" routerLink="/user/profile">Perfil</a>
       </li>
-      <li class="nav-item" *ngIf="isLogged">
+      <li class="nav-item" *ngIf="isLogged  && isDocente">
         <a class="nav-link" routerLink="/admin/phone-login">Lista Notas</a>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ver-notas">Ver Notas</a>
       </li>
 
+      <!-- <li class="nav-item" *ngIf="isLogged && isDocente">
+        <a class="nav-link" routerLink="/admin/lista-notas">Lista Notas</a>
+      </li> -->
+
       <!-- Administrador Roles -->
-      <li class="nav-item" *ngIf="isLogged">
+      <li class="nav-item" *ngIf="isLogged && isAdmin">
         <a class="nav-link" routerLink="admin/roles">Asignación de Roles</a>
       </li>
 
