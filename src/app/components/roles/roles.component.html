@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <th scope="col">Nombres</th>
-    
+
                 <th scope="col">Rol</th>
                 <th scope="col">Asignar/Actualizar Rol</th>
                 <th scope="col" class="d-flex justify-content-end">Eliminar</th>
@@ -17,7 +17,7 @@
                 <td>
                     <button class="btn btn-success mr-2" *ngIf="item.rol.admin == true">Admin</button>
                     <button class="btn btn-warning mr-2" *ngIf="item.rol.docente == true">Docente</button>
-    
+
                 </td>
                 <td>
                     <div class="btn-group" dropdown>
@@ -27,8 +27,9 @@
                         </button>
                         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
                             aria-labelledby="button-basic">
-                            <li role="menuitem" *ngFor="let choice of aux" (click)="openModal(template, choice, item.id)"
-                                class="cursor"><a class="dropdown-item">{{choice}}</a></li>
+                            <li role="menuitem" *ngFor="let choice of aux"
+                                (click)="openModal(template, choice, item.id)" class="cursor"><a
+                                    class="dropdown-item">{{choice}}</a></li>
                         </ul>
                     </div>
                 </td>
@@ -36,7 +37,7 @@
                     <button class="btn btn-danger" (click)="deleteAccount(item.id)">Eliminar</button>
                 </td>
             </tr>
-    
+
         </tbody>
     </table>
     <ng-template #template>
@@ -47,7 +48,8 @@
         </div>
     </ng-template>
     <div *ngFor="let alert of alerts">
-        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
+        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}
+        </alert>
     </div>
 </div>
 <div *ngIf="!isAdmin">
