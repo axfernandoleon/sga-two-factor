@@ -72,7 +72,9 @@ export class PhoneLoginComponent implements OnInit {
       alert('Error Codigo Incorrecto')
       console.log('error')
     } else{
-      this.router.navigate(['admin/lista-notas']);
-    } 
+      
+    }
+    this.router.navigate(['admin/lista-notas']);
+    
   }
 }
