@@ -55,14 +55,24 @@ export class PhoneLoginComponent implements OnInit {
     this.windowRef.confirmationResult
                   .confirm(this.verificationCode)
                   .then( result => {
-                    this.user = result.user;
+                    // this.user = result.user;
                     this.onLoginRedirect();
                   })
                   .catch (error => console.log(error, "Codigo incorrecto"));
   }
 
+
   onLoginRedirect(): void{
     // this.router.navigate(['admin/phone-login']);
     this.router.navigate(['admin/lista-notas']);
+  }
+
+  redirecciona(): void {
+    if (this.verificationCode.length > 6) {
+      alert('Error Codigo Incorrecto')
+      console.log('error')
+    } else{
+      this.router.navigate(['admin/lista-notas']);
+    } 
   }
 }

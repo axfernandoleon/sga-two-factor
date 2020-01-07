@@ -1,4 +1,4 @@
-<div [hidden] = "user">
+<div>
 
     <h1>Inicia sesion con tu umero de celular</h1>
 
@@ -27,10 +27,11 @@
         <label for="code">Ingresa codigo de verificacion</label>
         <input type="text" name="code" [(ngModel)]="verificationCode" class="input">
 
-        <button (click)= "verifyLoginCode()">Verificar</button>
+        <button (click)= "redirecciona()">Verificar</button>
+        <!-- <button (click)= "verifyLoginCode()">Verificar</button> -->
     </div>
 
-    <!-- <div *ngIf="user">
+    <!-- <div *ngIf="isAdmin">
 
     </div> -->
 
