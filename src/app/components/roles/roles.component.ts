@@ -5,7 +5,7 @@ import { UserInterface } from 'src/app/models/user';
 import { Observable } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 
 @Component({
@@ -14,41 +14,47 @@ import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
+  [x: string]: any;
   users: Observable<any>;
   roles: Observable<any>;
   aux;
   modalRef: BsModalRef;
   rolRef;
   idRef;
+  isAdmin;
   alerts: any[] = [{
     type: 'success',
     msg: "Cargado todos los datos",
     timeout: .01
   }];
-  constructor(private db: AngularFirestore, private modalService: BsModalService, private auth: AuthService) {
+  constructor(private db: AngularFirestore, private modalService: BsModalService, private authService: AuthService) {
 
 
   }
 
   ngOnInit() {
-    this.listUser();
-    this.listRoles();
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.authService.isUserRol(auth.uid).subscribe(userRole=> {
+            this.isAdmin= Object.assign({}, userRole.rol).hasOwnProperty('admin')
+            console.log(this.isAdmin);
+    
+            if (this.isAdmin) {
+              this.listUser();
+              this.listRoles();
+            }
+            
+        })
+      }
+    })
   }
 
   listUser() {
-    this.users = this.db.collection('users').snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
-          const id = a.payload.doc.id;
-          const data = a.payload.doc.data() as UserInterface;
-          return { id, ...data };
-        })
-      )
-    );
+    this.users = this.authService.listUser();
   }
 
   listRoles() {
-    this.auth.listRoles().subscribe(res => this.aux = res)
+    this.authService.listRoles().subscribe(res => this.aux = res)
   }
 
   openModal(template: TemplateRef<any>, rol, id) {
@@ -61,28 +67,16 @@ export class RolesComponent implements OnInit {
   }
   confirm() {
     // Asigna el Rol
-    this.db
-      .collection("users")
-      .doc(this.idRef)
-      .update({
-        rol: this.rolRef
-      });
-    // Actualiza la tabla de roles
-    this.db.collection("roles").doc(this.rolRef).update({ [this.idRef]: true });
-    
-    // this.db.collection('roles', (ref) => ref.where(this.idRef, '==', true).limit(1)).get().subscribe(users => {
-    //   console.log(users.size);
-      
-    //   if (users.size == 0) {
-        
-    //     console.log("listo");
-        
-    //   }else {
-    //     console.log("ya tiene el rol");
-        
-    //   }
-    // });
- 
+    const data = {
+      rol: {
+        [this.rolRef]: true
+      }
+    };
+    const user = {
+      uid: this.idRef
+    }
+    this.authService.updateUserData(user, data);
+
     this.modalRef.hide();
     this.alerts.push({
       type: 'info',
@@ -96,6 +90,7 @@ export class RolesComponent implements OnInit {
       .collection("users")
       .doc(id)
       .delete();
+    // this.auth.deleteUser(id);
   }
   onClosed(dismissedAlert: AlertComponent): void {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);

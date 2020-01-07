@@ -8,6 +8,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  users: any;
+  id: string;
+  isAdmin: boolean;
+  isDocente: boolean;
 
   constructor(
     private authService: AuthService,
@@ -19,15 +23,25 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.id= auth.uid;
+        this.authService.isUserRol(this.id).subscribe(userRole=> {
+        
+            this.isAdmin= Object.assign({}, userRole.rol).hasOwnProperty('admin'),
+            this.isDocente= Object.assign({}, userRole.rol).hasOwnProperty('docente')
+        
+        })
+      }
+    })
+    
   }
 
   getCurrentUser(){
     this.authService.isAuth().subscribe(auth => {
       if (auth){
-        console.log('usuario logueado');
         this.isLogged = true;
       } else {
-        console.log('Usuario no logueado');
         this.isLogged = false;
       }
     });

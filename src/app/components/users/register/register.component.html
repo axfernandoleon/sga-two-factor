@@ -11,7 +11,14 @@
                 <div class="alert alert-danger" role="alert" *ngIf="isError">
                   {{msgError}}
                 </div>
-
+                <div class="form-group">
+                  <input type="nombres" name="nombres" class="form-control" placeholder="Nombres" [(ngModel)]="nombres" required
+                    minlength="8">
+                </div>
+                <div class="form-group">
+                  <input type="apellidos" name="apellidos" class="form-control" placeholder="Apellidos" [(ngModel)]="apellidos" required
+                    minlength="8">
+                </div>
                 <div class="form-group">
                   <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="email" required
                     minlength="8">
