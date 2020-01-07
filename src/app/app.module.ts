@@ -30,6 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { PhoneLoginComponent } from './components/phone-login/phone-login.component';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     ProfileComponent,
     RegisterComponent,
     Page04Component,
-    RolesComponent
+    RolesComponent,
+    PhoneLoginComponent,
   ],
   imports: [
     BrowserModule,

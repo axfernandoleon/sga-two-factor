@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -9,15 +10,16 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { ProfileComponent } from './components/users/profile/profile.component';
 import { Page04Component } from './components/page04/page04.component';
 import { RolesComponent } from './components/roles/roles.component';
-
+import { PhoneLoginComponent } from './components/phone-login/phone-login.component';
 //Rutas
 const routes: Routes = [
 
-  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'offers', component: OffersComponent}, //Solo usuarios autenticados
   {path: 'nota/:id', component: DetallesNotaComponent},
   {path: 'admin/lista-notas', component: ListaNotasComponent},//Solo usuarios autenticados
   {path: 'admin/roles', component: RolesComponent}, //Solo usuarios autenticados
+  {path: 'admin/phone-login', component: PhoneLoginComponent},
   {path: 'user/login', component: LoginComponent},
   {path: 'user/register', component: RegisterComponent},
   {path: 'user/profile', component: ProfileComponent}, //Solo usuarios autenticados

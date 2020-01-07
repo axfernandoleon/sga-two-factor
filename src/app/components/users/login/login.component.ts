@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginRedirect(): void{
-    this.router.navigate(['admin/lista-notas']);
-    
+    this.router.navigate(['/home']);
+    // this.router.navigate(['admin/lista-notas']);
   }
 
 }
