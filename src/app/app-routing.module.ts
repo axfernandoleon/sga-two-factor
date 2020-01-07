@@ -10,14 +10,24 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { ProfileComponent } from './components/users/profile/profile.component';
 import { Page04Component } from './components/page04/page04.component';
 import { RolesComponent } from './components/roles/roles.component';
+<<<<<<< HEAD
 import { PhoneLoginComponent } from './components/phone-login/phone-login.component';
 //Rutas
 const routes: Routes = [
 
   {path: 'home', component: HomeComponent},
   {path: 'offers', component: OffersComponent}, //Solo usuarios autenticados
+=======
+import { AuthGuard } from "./guards/auth.guard";
+
+//Rutas
+const routes: Routes = [
+
+  {path: '', component: HomeComponent},
+  {path: 'offers', component: OffersComponent, canActivate: [AuthGuard]}, //Solo usuarios autenticados
+>>>>>>> 8ea640684fdcc6c841096928238a4661b386d34d
   {path: 'nota/:id', component: DetallesNotaComponent},
-  {path: 'admin/lista-notas', component: ListaNotasComponent},//Solo usuarios autenticados
+  {path: 'admin/lista-notas', component: ListaNotasComponent, canActivate: [AuthGuard]},//Solo usuarios autenticados
   {path: 'admin/roles', component: RolesComponent}, //Solo usuarios autenticados
   {path: 'admin/phone-login', component: PhoneLoginComponent},
   {path: 'user/login', component: LoginComponent},
