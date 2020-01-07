@@ -81,4 +81,5 @@ export class AuthService {
   isUserRol(id){
     return this.db.doc<UserInterface>(`users/${id}`).valueChanges();
   }
+  
 }

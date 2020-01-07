@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
           id: res.user.uid,
           email: res.user.email,
           nombres: res.user.displayName,
-
+          rol: {}
         };
         this.authService.updateUserData(res.user, data);
 

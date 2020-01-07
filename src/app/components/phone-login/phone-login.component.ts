@@ -1,4 +1,3 @@
-
 import { WindowService } from './../../services/window.service';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
@@ -10,7 +9,7 @@ export class PhoneNumber {
   // prefix: string
   line: string
 
-  get e593(){
+  get e593() {
     const num = this.country + this.line
     return `+${num}`
   }
@@ -29,9 +28,9 @@ export class PhoneLoginComponent implements OnInit {
   user: any;
 
   constructor(
-    private win : WindowService,
+    private win: WindowService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.windowRef = this.win.windowRef
@@ -40,28 +39,28 @@ export class PhoneLoginComponent implements OnInit {
     this.windowRef.recaptchaVerifier.render()
   }
 
-  sendLoginCode(){
+  sendLoginCode() {
     const appVerifier = this.windowRef.recaptchaVerifier;
     const num = this.phoneNumber.e593;
 
     firebase.auth().signInWithPhoneNumber(num, appVerifier)
-            .then(result => {
-              this.windowRef.confirmationResult = result;
-            })
-            .catch(error => console.log(error));
+      .then(result => {
+        this.windowRef.confirmationResult = result;
+      })
+      .catch(error => console.log(error));
   }
 
-  verifyLoginCode() { 
+  verifyLoginCode() {
     this.windowRef.confirmationResult
-                  .confirm(this.verificationCode)
-                  .then( result => {
-                    this.user = result.user;
-                    this.onLoginRedirect();
-                  })
-                  .catch (error => console.log(error, "Codigo incorrecto"));
+      .confirm(this.verificationCode)
+      .then(result => {
+        this.user = result.user;
+        this.onLoginRedirect();
+      })
+      .catch(error => console.log(error, "Codigo incorrecto"));
   }
 
-  onLoginRedirect(): void{
+  onLoginRedirect(): void {
     // this.router.navigate(['admin/phone-login']);
     this.router.navigate(['admin/lista-notas']);
   }
