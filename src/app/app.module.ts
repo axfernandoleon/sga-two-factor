@@ -13,7 +13,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 //Components
 import { ListaNotasComponent } from './components/admin/lista-notas/lista-notas.component';
 import { DetallesNotaComponent } from './components/detalles-nota/detalles-nota.component';
-import { HeroComponent } from './components/hero/hero.component';
 import { HomeComponent } from './components/home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -37,7 +36,6 @@ import { PhoneLoginComponent } from './components/phone-login/phone-login.compon
     AppComponent,
     ListaNotasComponent,
     DetallesNotaComponent,
-    HeroComponent,
     HomeComponent,
     ModalComponent,
     NavbarComponent,
